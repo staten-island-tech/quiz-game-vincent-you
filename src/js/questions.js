@@ -12,4 +12,4 @@ const questions = [
     },
   ];
   
-  export { questions };
+  export {questions};

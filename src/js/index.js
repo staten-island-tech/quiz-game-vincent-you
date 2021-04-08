@@ -1,7 +1,8 @@
-import { DOMSelectors } from "./DOMSelector";
-import { questions } from "./questions";
+import {DOMSelectors} from "./DOMSelector";
+import {questions} from "./questions";
 
-let score = 0; let index = 0;
+let score = 0; 
+let index = 0;
 
 //switches from landing page to quiz page
 DOMSelectors.start.addEventListener("click", () => {

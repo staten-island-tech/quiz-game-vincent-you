@@ -177,7 +177,7 @@ body {
   transition: 0.3s;
 }
 
-#rerestart-btn:hover {
+#restart-btn:hover {
   background-color: yellowgreen;
 }
 
