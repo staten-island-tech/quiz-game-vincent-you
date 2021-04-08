@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/DOMSelector.js":[function(require,module,exports) {
+})({"js/DOMSelectors.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -161,50 +161,51 @@ exports.questions = questions;
 },{}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
-var _DOMSelector = require("./DOMSelector");
+var _DOMSelectors = require("./DOMSelectors");
 
 var _questions = require("./questions");
 
+console.log("connected");
 var score = 0;
 var index = 0; //switches from landing page to quiz page
 
-_DOMSelector.DOMSelectors.start.addEventListener("click", function () {
-  _DOMSelector.DOMSelectors.landing.style.display = "none";
-  _DOMSelector.DOMSelectors.quizGame.style.display = "flex";
+_DOMSelectors.DOMSelectors.start.addEventListener("click", function () {
+  _DOMSelectors.DOMSelectors.landing.style.display = "none";
+  _DOMSelectors.DOMSelectors.quizGame.style.display = "flex";
 }); //shows the questions and choices
 
 
 function showQuestions() {
-  _DOMSelector.DOMSelectors.quizQuestion.innerHTML = _questions.questions[index].question;
-  _DOMSelector.DOMSelectors.choice1.innerHTML = _questions.questions[index].choices[0];
-  _DOMSelector.DOMSelectors.choice2.innerHTML = _questions.questions[index].choices[1];
-  _DOMSelector.DOMSelectors.choice3.innerHTML = _questions.questions[index].choices[2];
-  _DOMSelector.DOMSelectors.choice4.innerHTML = _questions.questions[index].choices[3];
+  _DOMSelectors.DOMSelectors.quizQuestion.innerHTML = _questions.questions[index].question;
+  _DOMSelectors.DOMSelectors.choice1.innerHTML = _questions.questions[index].choices[0];
+  _DOMSelectors.DOMSelectors.choice2.innerHTML = _questions.questions[index].choices[1];
+  _DOMSelectors.DOMSelectors.choice3.innerHTML = _questions.questions[index].choices[2];
+  _DOMSelectors.DOMSelectors.choice4.innerHTML = _questions.questions[index].choices[3];
 }
 
 showQuestions(); //when next button is clicked, moves on to the next index until max index is reached
 
-_DOMSelector.DOMSelectors.nextBtn.addEventListener("click", function () {
+_DOMSelectors.DOMSelectors.nextBtn.addEventListener("click", function () {
   if (index < _questions.questions.length - 1) {
     index++;
     showQuestions();
   } else {
-    _DOMSelector.DOMSelectors.quizGame.style.display = "none";
-    _DOMSelector.DOMSelectors.endPage.style.display = "flex";
+    _DOMSelectors.DOMSelectors.quizGame.style.display = "none";
+    _DOMSelectors.DOMSelectors.endPage.style.display = "flex";
   }
 
-  Array.from(_DOMSelector.DOMSelectors.choices).forEach(function (choice) {
+  Array.from(_DOMSelectors.DOMSelectors.choices).forEach(function (choice) {
     choice.style.backgroundColor = "rgb(44, 42, 42)";
   });
 
   for (var i = 0; i <= 3; i++) {
-    _DOMSelector.DOMSelectors.choices[i].classList.remove("disabled");
+    _DOMSelectors.DOMSelectors.choices[i].classList.remove("disabled");
   }
 
-  _DOMSelector.DOMSelectors.scoreBoard.innerHTML = "You Scored: ".concat(score, "/").concat(_questions.questions.length);
+  _DOMSelectors.DOMSelectors.scoreBoard.innerHTML = "You Scored: ".concat(score, "/").concat(_questions.questions.length);
 });
 
-Array.from(_DOMSelector.DOMSelectors.choices).forEach(function (choice) {
+Array.from(_DOMSelectors.DOMSelectors.choices).forEach(function (choice) {
   choice.addEventListener("click", function (e) {
     var selectedTarget = e.target;
     var selectedChoice = selectedTarget.innerHTML;
@@ -217,19 +218,19 @@ Array.from(_DOMSelector.DOMSelectors.choices).forEach(function (choice) {
     }
 
     for (var i = 0; i <= 3; i++) {
-      _DOMSelector.DOMSelectors.choices[i].classList.add("disabled");
+      _DOMSelectors.DOMSelectors.choices[i].classList.add("disabled");
     }
   });
 });
 
-_DOMSelector.DOMSelectors.retake.addEventListener("click", function () {
-  _DOMSelector.DOMSelectors.endPage.style.display = "none";
-  _DOMSelector.DOMSelectors.landing.style.display = "flex";
+_DOMSelectors.DOMSelectors.retake.addEventListener("click", function () {
+  _DOMSelectors.DOMSelectors.endPage.style.display = "none";
+  _DOMSelectors.DOMSelectors.landing.style.display = "flex";
   score = 0;
   index = 0;
   showQuestions();
 });
-},{"./DOMSelector":"js/DOMSelector.js","./questions":"js/questions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./DOMSelectors":"js/DOMSelectors.js","./questions":"js/questions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
