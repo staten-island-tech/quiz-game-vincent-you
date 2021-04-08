@@ -1,3 +1,188 @@
-body{
-    background-color: aqua;
+  
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+.quiz {
+  background-color: steelblue;
+  height: 100vh;
+}
+
+#landing {
+  width: 30vw;
+  height: 50vh;
+  transform: translate(110%, 50%);
+  text-align: center;
+  background-color: rgb(44, 42, 42);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // display: none;
+}
+
+.title {
+  // display: flex;
+  // flex-direction: column;
+  font-size: 5rem;
+  display: block;
+  color: white;
+  transform: translateY(30%);
+}
+
+#btn {
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  border: solid 2px skyblue;
+  border-radius: 2.5rem;
+  background: none;
+  width: 15rem;
+  padding: 1.5rem 2rem;
+  // transform: translateY(300%);
+  outline: none;
+  transition: 0.3s;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+#btn:hover {
+  background: skyblue;
+}
+
+#quiz-game {
+  width: 30vw;
+  height: 50vh;
+  transform: translate(110%, 50%);
+  text-align: center;
+  background-color: rgb(44, 42, 42);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: none;
+}
+
+.question-box {
+  display: flex;
+  flex-direction: row;
+  transform: translateY(100%);
+}
+
+#question-no {
+  font-size: 4rem;
+  color: white;
+}
+
+#question {
+  font-size: 4rem;
+  color: white;
+}
+
+#choices {
+  // justify-content: space-around;
+  transform: translateY(50%);
+}
+.row-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 30vw;
+  justify-content: space-around;
+}
+.row-2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 30vw;
+  justify-content: space-around;
+}
+.choice {
+  width: 10rem;
+  font-size: 2rem;
+  border: solid 2px greenyellow;
+  padding: 1rem;
+  margin: 2rem;
+  color: white;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+#next-btn {
+  font-size: 2.5rem;
+  color: black;
+  background-color: skyblue;
+  border: solid 2px blue;
+  border-radius: 1rem;
+  width: 7rem;
+  padding: 1.5rem 2.25rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transform: translate(100%, 200%);
+}
+
+.choice:hover {
+  box-shadow: 5px 4px 2px yellow;
+  transform: scale(1.1);
+}
+
+#next-btn:hover {
+  color: white;
+}
+
+#end {
+  width: 30vw;
+  height: 50vh;
+  transform: translate(110%, 50%);
+  text-align: center;
+  background-color: rgb(44, 42, 42);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: none;
+}
+
+.thanks {
+  color: white;
+  font-size: 4rem;
+}
+
+#score-board {
+  color: white;
+  font-size: 2.5rem;
+  margin: 1rem;
+}
+
+.img {
+  height: 15rem;
+  margin: 1rem;
+}
+
+#retake-btn {
+  outline: none;
+  background: none;
+  border: solid 2px yellowgreen;
+  border-radius: 2.5rem;
+  font-size: 2rem;
+  color: white;
+  padding: 2rem 3rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#retake-btn:hover {
+  background-color: yellowgreen;
+}
+
+#retake-btn:active {
+  transform: scale(1.05);
 }

@@ -117,26 +117,119 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/index.js":[function(require,module,exports) {
-var questions = [{
-  question: "What's your name?",
-  answerArr: [{
-    position: "A",
-    content: "Vincent"
-  }, {
-    position: "B",
-    content: "Mike"
-  }, {
-    position: "C",
-    content: "Chris"
-  }],
-  correctAnswer: "B"
-}];
+})({"js/DOMSelector.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DOMSelectors = void 0;
 var DOMSelectors = {
-  begin: document.getElementById("begin")
+  start: document.querySelector("#btn"),
+  quizQuestion: document.querySelector("#question"),
+  choice1: document.querySelector("#choice1"),
+  choice2: document.querySelector("#choice2"),
+  choice3: document.querySelector("#choice3"),
+  choice4: document.querySelector("#choice4"),
+  nextBtn: document.querySelector("#next-btn"),
+  score: document.querySelector("#score"),
+  retake: document.querySelector("#retake-btn"),
+  landing: document.querySelector("#landing"),
+  quizGame: document.querySelector("#quiz-game"),
+  endPage: document.querySelector("#end"),
+  choices: document.querySelectorAll(".choice"),
+  scoreBoard: document.querySelector("#score-board")
 };
-console.log(DOMSelectors.begin);
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+exports.DOMSelectors = DOMSelectors;
+},{}],"js/questions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.questions = void 0;
+var questions = [{
+  question: "What anime is this ?",
+  choices: ["Naruto", "One Piece", "Demon Slayer", "Black Clover"],
+  answer: "One Piece"
+}, {
+  question: "What anime is this guy from ?",
+  choices: ["Naruto", "One piece", "Demon Slayer", "Black Clover"],
+  answer: "Naruto"
+}];
+exports.questions = questions;
+},{}],"js/index.js":[function(require,module,exports) {
+"use strict";
+
+var _DOMSelector = require("./DOMSelector");
+
+var _questions = require("./questions");
+
+var score = 0;
+var index = 0; //switches from landing page to quiz page
+
+_DOMSelector.DOMSelectors.start.addEventListener("click", function () {
+  _DOMSelector.DOMSelectors.landing.style.display = "none";
+  _DOMSelector.DOMSelectors.quizGame.style.display = "flex";
+}); //shows the questions and choices
+
+
+function showQuestions() {
+  _DOMSelector.DOMSelectors.quizQuestion.innerHTML = _questions.questions[index].question;
+  _DOMSelector.DOMSelectors.choice1.innerHTML = _questions.questions[index].choices[0];
+  _DOMSelector.DOMSelectors.choice2.innerHTML = _questions.questions[index].choices[1];
+  _DOMSelector.DOMSelectors.choice3.innerHTML = _questions.questions[index].choices[2];
+  _DOMSelector.DOMSelectors.choice4.innerHTML = _questions.questions[index].choices[3];
+}
+
+showQuestions(); //when next button is clicked, moves on to the next index until max index is reached
+
+_DOMSelector.DOMSelectors.nextBtn.addEventListener("click", function () {
+  if (index < _questions.questions.length - 1) {
+    index++;
+    showQuestions();
+  } else {
+    _DOMSelector.DOMSelectors.quizGame.style.display = "none";
+    _DOMSelector.DOMSelectors.endPage.style.display = "flex";
+  }
+
+  Array.from(_DOMSelector.DOMSelectors.choices).forEach(function (choice) {
+    choice.style.backgroundColor = "rgb(44, 42, 42)";
+  });
+
+  for (var i = 0; i <= 3; i++) {
+    _DOMSelector.DOMSelectors.choices[i].classList.remove("disabled");
+  }
+
+  _DOMSelector.DOMSelectors.scoreBoard.innerHTML = "You Scored: ".concat(score, "/").concat(_questions.questions.length);
+});
+
+Array.from(_DOMSelector.DOMSelectors.choices).forEach(function (choice) {
+  choice.addEventListener("click", function (e) {
+    var selectedTarget = e.target;
+    var selectedChoice = selectedTarget.innerHTML;
+
+    if (selectedChoice === _questions.questions[index].answer) {
+      selectedTarget.style.backgroundColor = "green";
+      score++;
+    } else {
+      selectedTarget.style.backgroundColor = "red";
+    }
+
+    for (var i = 0; i <= 3; i++) {
+      _DOMSelector.DOMSelectors.choices[i].classList.add("disabled");
+    }
+  });
+});
+
+_DOMSelector.DOMSelectors.retake.addEventListener("click", function () {
+  _DOMSelector.DOMSelectors.endPage.style.display = "none";
+  _DOMSelector.DOMSelectors.landing.style.display = "flex";
+  score = 0;
+  index = 0;
+  showQuestions();
+});
+},{"./DOMSelector":"js/DOMSelector.js","./questions":"js/questions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
