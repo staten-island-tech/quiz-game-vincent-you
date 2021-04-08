@@ -7,9 +7,38 @@
     <title>Quiz Game </title>
 </head>
 <body>
-    <div id="quiz">quiz</div>
-    <div id="begin">begin</div>
-    <div id="score">score</div>
-    <script src="js/index.js"></script>
+    <section class="Test">
+        <div id="first">
+            <h1 class="title">Welcome to the Guess who this is</h1>
+             <img class="img" src="" alt="">
+            <button id="btn" type="button">Begin</button>
+        </div>
+            <div id="guessing">
+                <div class="question-box">
+                    <div id="question"></div>
+                </div>
+                 <div id="answers">
+                    <div class="row-1">
+                     <div class="choice" id="choice1"></div>
+                     <div class="choice" id="choice2"></div>
+                    </div>
+                     <div class="row-2">
+                     <div class="choice" id="choice3"></div>
+                     <div class="choice" id="choice4"></div>
+                     </div>
+                     
+                 </div>
+                 <div id="second-btn">Next</div>
+            </div>
+        
+            <div id="score">
+                <h1 class="fail">you got it !</h1>
+                <img class="img" src="" alt="">
+                <div id="score-board">You Scored: <span id="score"></span></div>
+                <button type="button" id="retake-btn">Restart</button>
+            </div>
+    </section>
+    <script src ="js/index.js"></script>
+    
 </body>
 </html>
