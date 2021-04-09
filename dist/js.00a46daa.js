@@ -191,6 +191,7 @@ getNewQuestion = function getNewQuestion() {
 
   question.innerText = currentQuestion.question; //show the text the question will show
 
+  console.log(questionsIndex);
   choices.forEach(function (choice) {
     var number = choice.dataset['number']; //you'll know what choice we are clicking on
 
@@ -201,7 +202,6 @@ getNewQuestion = function getNewQuestion() {
   acceptingAnswers = true;
 };
 
-console.log(getNewQuestion);
 choices.forEach(function (choice) {
   choice.addEventListener('click', function (e) {
     if (!acceptingAnswers) return;

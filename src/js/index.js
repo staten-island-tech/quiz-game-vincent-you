@@ -72,9 +72,12 @@ getNewQuestion = () => {
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}` //means the questions coutner text will be the current questions out of in this case 4 questions
     progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%` //calculate the question we are on and multiply it by percent 
 
+
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length) //this will calculate the question index
     currentQuestion= availableQuestions[questionsIndex] //it will keep track of what question we are on
     question.innerText = currentQuestion.question //show the text the question will show
+    console.log(questionsIndex)
+    
 
     choices.forEach(choice => {
         const number = choice.dataset['number'] //you'll know what choice we are clicking on
@@ -85,8 +88,6 @@ getNewQuestion = () => {
 
     acceptingAnswers = true 
 }
-
-console.log(getNewQuestion)
 
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
@@ -108,7 +109,7 @@ choices.forEach(choice => {
            selectedChoice.parentElement.classList.remove(classToApply) //this will allow score to change if u get it wrong
              getNewQuestion ()
         }, 1000)
-    })
+    })  
 })
 
 incrementScore = num => {
