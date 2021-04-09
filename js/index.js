@@ -1,6 +1,6 @@
 console.log("connected");
 import {DOMSelectors} from "./DOMSelectors";
-import {questions} from "./questions";
+import {questions} from "../src/js/questions";
 
 let score = 0; 
 let index = 0;

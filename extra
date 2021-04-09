@@ -42,3 +42,25 @@
     
 </body>
 </html>
+
+
+<p> Question </p>
+
+const lastQuestion = question.length - 1;
+let runningQuestion = 0;
+
+
+
+const start = document.getElementById("start");
+    start.addEventListener("click", startQuiz); 
+
+    let TIMER;
+
+    function startQuiz (){ 
+        start.style.display = "none";
+        counterRender();
+        TIMER = setInterval(counterRender, 1000); //the quiz will start at 0, and sound by 1 second 
+        progressRender();
+        questionRender();
+        quiz.style.display = "block";   
+    };

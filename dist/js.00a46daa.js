@@ -118,36 +118,52 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
-var _ref, _ref2;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+// select all elements
 var start = document.getElementById("start");
 var quiz = document.getElementById("quiz");
-var qImage = document.getElementById("qImage");
 var question = document.getElementById("question");
-var counter = document.getElementById("counter");
-var timeGauge = document.getElementById("timeGauge");
-var progress = document.getElementById("progress");
-var scoreContainer = document.getElementById("scoreContainer");
+var qImg = document.getElementById("qImg");
 var choiceA = document.getElementById("A");
 var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
-var questions = [(_ref = {
-  question: "Which animal can live the longest",
-  choiceA: "giraffe",
-  choiceB: "Cow"
-}, _defineProperty(_ref, "choiceA", "Pig"), _defineProperty(_ref, "correct", "A"), _ref), (_ref2 = {
-  question: "Which animal can run the fastest",
-  choiceA: "Rhino",
-  choiceB: "Cheeta"
-}, _defineProperty(_ref2, "choiceA", "Kangaroo"), _defineProperty(_ref2, "correct", "B"), _ref2)];
-var lastQuestion = question.length - 1;
+var counter = document.getElementById("counter");
+var timeGauge = document.getElementById("timeGauge");
+var progress = document.getElementById("progress");
+var scoreDiv = document.getElementById("scoreContainer"); // create our questions
+
+var questions = [{
+  question: "What does HTML stand for?",
+  imgSrc: "img/html.png",
+  choiceA: "Correct",
+  choiceB: "Wrong",
+  choiceC: "Wrong",
+  correct: "A"
+}, {
+  question: "What does CSS stand for?",
+  imgSrc: "img/css.png",
+  choiceA: "Wrong",
+  choiceB: "Correct",
+  choiceC: "Wrong",
+  correct: "B"
+}, {
+  question: "What does JS stand for?",
+  imgSrc: "img/js.png",
+  choiceA: "Wrong",
+  choiceB: "Wrong",
+  choiceC: "Correct",
+  correct: "C"
+}]; // create some variables
+
+var lastQuestion = questions.length - 1;
 var runningQuestion = 0;
 var count = 0;
-var questionTime = 10;
-var gaugeWidth = 150;
+var questionTime = 10; // 10s
+
+var gaugeWidth = 150; // 150px
+
 var gaugeUnit = gaugeWidth / questionTime;
+var TIMER;
+var score = 0; // render a question
 
 function renderQuestion() {
   var q = questions[runningQuestion];
@@ -158,25 +174,90 @@ function renderQuestion() {
   choiceC.innerHTML = q.choiceC;
 }
 
-start.style.display = "none";
-renderQuestion();
-quiz.style.display = "block";
-renderProgress(); //progress
+start.addEventListener("click", startQuiz); // start quiz
+
+function startQuiz() {
+  start.style.display = "none";
+  renderQuestion();
+  quiz.style.display = "block";
+  renderProgress();
+  renderCounter();
+  TIMER = setInterval(renderCounter, 1000); // 1000ms = 1s
+} // render progress
+
 
 function renderProgress() {
   for (var qIndex = 0; qIndex <= lastQuestion; qIndex++) {
-    progress.innerHTML += "<div class= 'prog' id= " + qIndex + "></div>";
+    progress.innerHTML += "<div class='prog' id=" + qIndex + "></div>";
   }
-}
+} // counter render
+
 
 function renderCounter() {
   if (count <= questionTime) {
     counter.innerHTML = count;
-    timeGauge.style.width = count * gaugeUnit;
+    timeGauge.style.width = count * gaugeUnit + "px";
     count++;
   } else {
-    count = 0;
+    count = 0; // change progress color to red
+
+    answerIsWrong();
+
+    if (runningQuestion < lastQuestion) {
+      runningQuestion++;
+      renderQuestion();
+    } else {
+      // end the quiz and show the score
+      clearInterval(TIMER);
+      scoreRender();
+    }
   }
+} // checkAnwer
+
+
+function checkAnswer(answer) {
+  if (answer == questions[runningQuestion].correct) {
+    // answer is correct
+    score++; // change progress color to green
+
+    answerIsCorrect();
+  } else {
+    // answer is wrong
+    // change progress color to red
+    answerIsWrong();
+  }
+
+  count = 0;
+
+  if (runningQuestion < lastQuestion) {
+    runningQuestion++;
+    renderQuestion();
+  } else {
+    // end the quiz and show the score
+    clearInterval(TIMER);
+    scoreRender();
+  }
+} // answer is correct
+
+
+function answerIsCorrect() {
+  document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+} // answer is Wrong
+
+
+function answerIsWrong() {
+  document.getElementById(runningQuestion).style.backgroundColor = "#f00";
+} // score render
+
+
+function scoreRender() {
+  scoreDiv.style.display = "block"; // calculate the amount of question percent answered by the user
+
+  var scorePerCent = Math.round(100 * score / questions.length); // choose the image based on the scorePerCent
+
+  var img = scorePerCent >= 80 ? "img/5.png" : scorePerCent >= 60 ? "img/4.png" : scorePerCent >= 40 ? "img/3.png" : scorePerCent >= 20 ? "img/2.png" : "img/1.png";
+  scoreDiv.innerHTML = "<img src=" + img + ">";
+  scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
 }
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -206,7 +287,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53509" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53584" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
