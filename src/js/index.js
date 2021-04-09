@@ -1,15 +1,15 @@
 console.log("connected")
-const question = document.querySelector('#question')
-const choices = Array.from(document.querySelectorAll('#choices-text'))
+const question = document.querySelector("#question"); //allows you to change the nature of the element (class to id, vice versa)
+const choices = Array.from(document.querySelectorAll(".choice-text"));
+const scoreText = document.querySelector("#score");
 const progressText = document.querySelector('#progressText')
-const scoreText = document.querySelector('#score')
 const progressBarFull = document.querySelector('#progressBarFull')
 
-let currentQuestion = {} //put it into an empty object
-let acceptingAnswers = true
-let score = 0
-let questionCounter = 0
-let availableQuestions = []
+let currentQuestion = {}; //put it into an empty object
+let acceptingAnswers = true;
+let score = 0;
+let questionCounter = 0 ; 
+let availableQuestions = [];
 
 let questions = [
     {
@@ -60,9 +60,9 @@ startGame = () => { //starting a function
 
 getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-        localStorage.setItem('mostRecentScore',score) //this will keep track of the score as u take the quiz
+        localStorage.setItem("mostRecentScore",score) //this will keep track of the score as u take the quiz
 
-        return window.location.assign('/end.html') // PERHAPS THE PROBLEM ???????????????????????????????????????????????
+        return window.location.assign("/end.html"); // PERHAPS THE PROBLEM ???????????????????????????????????????????????
     }
     questionCounter++
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}` //means the questions coutner text will be the current questions out of in this case 4 questions
@@ -73,7 +73,7 @@ getNewQuestion = () => {
     currentQuestion= availableQuestions[questionsIndex] //it will keep track of what question we are on
     question.innerText = currentQuestion.question //show the text the question will show
     console.log(questionsIndex)
-    
+        
     choices.forEach(choice => {
         const number = choice.dataset['number'] //you'll know what choice we are clicking on
         choice.innerText = currentQuestion['choice' + number]

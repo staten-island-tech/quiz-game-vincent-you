@@ -119,10 +119,11 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
 console.log("connected");
-var question = document.querySelector('#question');
-var choices = Array.from(document.querySelectorAll('#choices-text'));
+var question = document.querySelector("#question"); //allows you to change the nature of the element (class to id, vice versa)
+
+var choices = Array.from(document.querySelectorAll(".choice-text"));
+var scoreText = document.querySelector("#score");
 var progressText = document.querySelector('#progressText');
-var scoreText = document.querySelector('#score');
 var progressBarFull = document.querySelector('#progressBarFull');
 var currentQuestion = {}; //put it into an empty object
 
@@ -174,9 +175,9 @@ startGame = function startGame() {
 
 getNewQuestion = function getNewQuestion() {
   if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-    localStorage.setItem('mostRecentScore', score); //this will keep track of the score as u take the quiz
+    localStorage.setItem("mostRecentScore", score); //this will keep track of the score as u take the quiz
 
-    return window.location.assign('/end.html'); // PERHAPS THE PROBLEM ???????????????????????????????????????????????
+    return window.location.assign("/end.html"); // PERHAPS THE PROBLEM ???????????????????????????????????????????????
   }
 
   questionCounter++;
