@@ -26,7 +26,7 @@ let questions = [
         choices2: 'Kristina',
         choices3: 'Melony',
         choices4: 'Henry',
-        answer: 1,       
+        answer: 2,       
       },
     {
         question: "What name starts with Z ?",
@@ -34,7 +34,7 @@ let questions = [
         choices2: 'Kristina',
         choices3: 'Melony',
         choices4: 'Henry',
-        answer: 1,       
+        answer: 3,       
       },
       
     {
@@ -43,9 +43,10 @@ let questions = [
         choices2: 'Kristina',
         choices3: 'Melony',
         choices4: 'Henry',
-        answer: 1,       
+        answer: 4,       
       },     
 ]
+console.log(questions)
 
 const SCORE_POINTS = 100
 const MAX_QUESTIONS = 4
@@ -57,6 +58,8 @@ startGame = () => { //starting a function
     availableQuestions = [...questions] //using ... because using spread we can get the values from the choices
     getNewQuestion()
 }
+
+console.log(startGame)
 
 getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
@@ -82,6 +85,8 @@ getNewQuestion = () => {
 
     acceptingAnswers = true 
 }
+
+console.log(getNewQuestion)
 
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
@@ -110,5 +115,7 @@ incrementScore = num => {
     score += num
     scoreText.innerText = score
 }
+
+console.log(incrementScore)
 
 startGame()

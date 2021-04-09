@@ -142,22 +142,23 @@ var questions = [{
   choices2: 'Kristina',
   choices3: 'Melony',
   choices4: 'Henry',
-  answer: 1
+  answer: 2
 }, {
   question: "What name starts with Z ?",
   choices1: 'Chandler',
   choices2: 'Kristina',
   choices3: 'Melony',
   choices4: 'Henry',
-  answer: 1
+  answer: 3
 }, {
   question: "What name starts with G ?",
   choices1: 'Chandler',
   choices2: 'Kristina',
   choices3: 'Melony',
   choices4: 'Henry',
-  answer: 1
+  answer: 4
 }];
+console.log(questions);
 var SCORE_POINTS = 100;
 var MAX_QUESTIONS = 4;
 
@@ -169,6 +170,8 @@ startGame = function startGame() {
 
   getNewQuestion();
 };
+
+console.log(startGame);
 
 getNewQuestion = function getNewQuestion() {
   if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
@@ -198,6 +201,7 @@ getNewQuestion = function getNewQuestion() {
   acceptingAnswers = true;
 };
 
+console.log(getNewQuestion);
 choices.forEach(function (choice) {
   choice.addEventListener('click', function (e) {
     if (!acceptingAnswers) return;
@@ -225,6 +229,7 @@ incrementScore = function incrementScore(num) {
   scoreText.innerText = score;
 };
 
+console.log(incrementScore);
 startGame();
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -254,7 +259,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61302" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61642" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
