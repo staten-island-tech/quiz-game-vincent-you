@@ -172,13 +172,11 @@ startGame = function startGame() {
   getNewQuestion();
 };
 
-console.log(startGame);
-
 getNewQuestion = function getNewQuestion() {
   if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
     localStorage.setItem('mostRecentScore', score); //this will keep track of the score as u take the quiz
 
-    return window.location.assign('/end.html');
+    return window.location.assign('/end.html'); // PERHAPS THE PROBLEM ???????????????????????????????????????????????
   }
 
   questionCounter++;
@@ -260,7 +258,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63119" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53116" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

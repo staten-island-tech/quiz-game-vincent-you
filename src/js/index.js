@@ -52,7 +52,6 @@ console.log(questions)
 const SCORE_POINTS = 100
 const MAX_QUESTIONS = 4
 
-
 startGame = () => { //starting a function
     questionCounter = 0
     score = 0
@@ -60,15 +59,12 @@ startGame = () => { //starting a function
     getNewQuestion()
 }
 
-console.log(startGame)
-
 getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore',score) //this will keep track of the score as u take the quiz
 
-        return window.location.assign('/end.html')
+        return window.location.assign('/end.html') // PERHAPS THE PROBLEM ???????????????????????????????????????????????
     }
-
     questionCounter++
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}` //means the questions coutner text will be the current questions out of in this case 4 questions
     progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%` //calculate the question we are on and multiply it by percent 
@@ -88,6 +84,7 @@ getNewQuestion = () => {
 
     acceptingAnswers = true 
 }
+
 
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
