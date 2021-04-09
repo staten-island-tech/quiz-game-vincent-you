@@ -118,7 +118,114 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
+var question = document.querySelector('#question');
+var choices = Array.from(document.querySelectorAll('#choices-text'));
+var progressText = document.querySelector('#progressText');
+var scoreText = document.querySelector('#score');
+var progressBarFull = document.querySelector('#progressBarFull');
+var currentQuestion = {}; //put it into an empty object
 
+var acceptingAnswers = true;
+var score = 0;
+var questionCounter = 0;
+var availableQuestions = [];
+var questions = [{
+  question: "What name starts with C ?",
+  choices1: 'Chandler',
+  choices2: 'Kristina',
+  choices3: 'Melony',
+  choices4: 'Henry',
+  answer: 1
+}, {
+  question: "What name starts with B ?",
+  choices1: 'Chandler',
+  choices2: 'Kristina',
+  choices3: 'M elony',
+  choices4: 'Henry',
+  answer: 1
+}, {
+  question: "What name starts with Z ?",
+  choices1: 'Chandler',
+  choices2: 'Kristina',
+  choices3: 'Melony',
+  choices4: 'Henry',
+  answer: 1
+}, {
+  question: "What name starts with G ?",
+  choices1: 'Chandler',
+  choices2: 'Kristina',
+  choices3: 'Melony',
+  choices4: 'Henry',
+  answer: 1
+}];
+var SCORE_POINTS = 100;
+var MAX_QUESTIONS = 4;
+
+startGame = function startGame() {
+  //starting a function
+  questionCounter = 0;
+  score = 0;
+  availableQuestions = [].concat(questions); //using ... because using spread we can get the values from the choices
+
+  getNewQuestion();
+};
+
+getNewQuestion = function getNewQuestion() {
+  if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+    localStorage.setItem('mostRecentScore', score); //this will keep track of the score as u take the quiz
+
+    return window.location.assign('/end.html');
+  }
+
+  questionCounter++;
+  progressText.innerText = "Question ".concat(questionCounter, " of ").concat(MAX_QUESTIONS); //means the questions coutner text will be the current questions out of in this case 4 questions
+
+  progressBarFull.style.width = "".concat(questionCounter / MAX_QUESTIONS * 100, "%"); //calculate the question we are on and multiply it by percent 
+
+  var questionsIndex = Math.floor(Math.random() * availableQuestions.length); //this will calculate the question index
+
+  currentQuestion = availableQuestions[questionsIndex]; //it will keep track of what question we are on
+
+  question.innerText = currentQuestion.question; //show the text the question will show
+
+  choices.forEach(function (choice) {
+    var number = choice.dataset['number']; //you'll know what choice we are clicking on
+
+    choice.innerText = currentQuestion['choice' + number];
+  });
+  availableQuestions.splice(questionsIndex, 1); //it adds item to the array
+
+  acceptingAnswers = true;
+};
+
+choices.forEach(function (choice) {
+  choice.addEventListener('click', function (e) {
+    if (!acceptingAnswers) return;
+    acceptingAnswers = false;
+    var selectedChoice = e.target;
+    var selectedAnswer = selectedChoice.dataset['number'];
+    var classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'; //using ternary
+
+    if (classToApply === 'correct') {
+      incrementScore(SCORE_POINTS);
+    }
+
+    selectedChoice.parentElement.classList.add(classToApply); //this will count if you answer the question correctly
+
+    setTimeout(function () {
+      selectedChoice.parentElement.classList.remove(classToApply); //this will allow score to change if u get it wrong
+
+      getNewQuestion();
+    }, 1000);
+  });
+});
+
+incrementScore = function incrementScore(num) {
+  score += num;
+  scoreText.innerText = score;
+};
+
+startGame();
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -147,7 +254,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54733" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63138" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
