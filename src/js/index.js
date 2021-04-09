@@ -1,43 +1,31 @@
-// select all elements
 const start = document.getElementById("start");
 const quiz = document.getElementById("quiz");
+const qImage  = document.getElementById("qImage");
 const question = document.getElementById("question");
-const qImg = document.getElementById("qImg");
-const choiceA = document.getElementById("A");
-const choiceB = document.getElementById("B");
-const choiceC = document.getElementById("C");
 const counter = document.getElementById("counter");
 const timeGauge = document.getElementById("timeGauge");
 const progress = document.getElementById("progress");
-const scoreDiv = document.getElementById("scoreContainer");
+const scoreContainer = document.getElementById("scoreContainer");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
 
-// create our questions
 let questions = [
     {
-        question : "What does HTML stand for?",
-        imgSrc : "img/html.png",
-        choiceA : "Correct",
-        choiceB : "Wrong",
-        choiceC : "Wrong",
+        question : "Which animal can live the longest",
+        choiceA : "giraffe",
+        choiceB : "Cow",
+        choiceA : "Pig",
         correct : "A"
-    },{
-        question : "What does CSS stand for?",
-        imgSrc : "img/css.png",
-        choiceA : "Wrong",
-        choiceB : "Correct",
-        choiceC : "Wrong",
+    }, {
+        question : "Which animal can run the fastest",
+        choiceA : "Rhino",
+        choiceB : "Cheeta",
+        choiceA : "Kangaroo",
         correct : "B"
-    },{
-        question : "What does JS stand for?",
-        imgSrc : "img/js.png",
-        choiceA : "Wrong",
-        choiceB : "Wrong",
-        choiceC : "Correct",
-        correct : "C"
-    }
-];
+    },
+]
 
-// create some variables
 
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
@@ -151,24 +139,4 @@ function scoreRender(){
     scoreDiv.innerHTML = "<img src="+ img +">";
     scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

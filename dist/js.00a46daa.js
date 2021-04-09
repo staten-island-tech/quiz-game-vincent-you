@@ -118,42 +118,30 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
-// select all elements
+var _ref, _ref2;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var start = document.getElementById("start");
 var quiz = document.getElementById("quiz");
+var qImage = document.getElementById("qImage");
 var question = document.getElementById("question");
-var qImg = document.getElementById("qImg");
-var choiceA = document.getElementById("A");
-var choiceB = document.getElementById("B");
-var choiceC = document.getElementById("C");
 var counter = document.getElementById("counter");
 var timeGauge = document.getElementById("timeGauge");
 var progress = document.getElementById("progress");
-var scoreDiv = document.getElementById("scoreContainer"); // create our questions
-
-var questions = [{
-  question: "What does HTML stand for?",
-  imgSrc: "img/html.png",
-  choiceA: "Correct",
-  choiceB: "Wrong",
-  choiceC: "Wrong",
-  correct: "A"
-}, {
-  question: "What does CSS stand for?",
-  imgSrc: "img/css.png",
-  choiceA: "Wrong",
-  choiceB: "Correct",
-  choiceC: "Wrong",
-  correct: "B"
-}, {
-  question: "What does JS stand for?",
-  imgSrc: "img/js.png",
-  choiceA: "Wrong",
-  choiceB: "Wrong",
-  choiceC: "Correct",
-  correct: "C"
-}]; // create some variables
-
+var scoreContainer = document.getElementById("scoreContainer");
+var choiceA = document.getElementById("A");
+var choiceB = document.getElementById("B");
+var choiceC = document.getElementById("C");
+var questions = [(_ref = {
+  question: "Which animal can live the longest",
+  choiceA: "giraffe",
+  choiceB: "Cow"
+}, _defineProperty(_ref, "choiceA", "Pig"), _defineProperty(_ref, "correct", "A"), _ref), (_ref2 = {
+  question: "Which animal can run the fastest",
+  choiceA: "Rhino",
+  choiceB: "Cheeta"
+}, _defineProperty(_ref2, "choiceA", "Kangaroo"), _defineProperty(_ref2, "correct", "B"), _ref2)];
 var lastQuestion = questions.length - 1;
 var runningQuestion = 0;
 var count = 0;
@@ -287,7 +275,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53584" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53553" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
