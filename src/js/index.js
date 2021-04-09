@@ -1,3 +1,4 @@
+console.log("connected")
 const question = document.querySelector('#question')
 const choices = Array.from(document.querySelectorAll('#choices-text'))
 const progressText = document.querySelector('#progressText')
@@ -78,7 +79,6 @@ getNewQuestion = () => {
     question.innerText = currentQuestion.question //show the text the question will show
     console.log(questionsIndex)
     
-
     choices.forEach(choice => {
         const number = choice.dataset['number'] //you'll know what choice we are clicking on
         choice.innerText = currentQuestion['choice' + number]

@@ -118,6 +118,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
+console.log("connected");
 var question = document.querySelector('#question');
 var choices = Array.from(document.querySelectorAll('#choices-text'));
 var progressText = document.querySelector('#progressText');
