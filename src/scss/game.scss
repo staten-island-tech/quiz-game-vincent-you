@@ -62,6 +62,9 @@ body{
     overflow: hidden;
 }
 
-.question{
-    font-size: 3rem;
+#progressBarFull{
+    height: 100%;
+    background: rgb(70, 167, 70);
+    width: 0%;
 }
+ 
