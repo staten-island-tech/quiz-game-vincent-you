@@ -1,8 +1,9 @@
-const questions = [
+const problems = [
     {
       question: "What anime is this ?",
       choices: ["Naruto", "One Piece", "Demon Slayer", "Black Clover"],
       answer: "One Piece",
+     
     },
     
     {
@@ -12,4 +13,4 @@ const questions = [
     },
   ];
   
-  export {questions};
+  export {problems};

@@ -117,120 +117,68 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/DOMSelectors.js":[function(require,module,exports) {
-"use strict";
+})({"js/index.js":[function(require,module,exports) {
+var _ref, _ref2;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.DOMSelectors = void 0;
-var DOMSelectors = {
-  start: document.querySelector("#btn"),
-  quizQuestion: document.querySelector("#question"),
-  choice1: document.querySelector("#choice1"),
-  choice2: document.querySelector("#choice2"),
-  choice3: document.querySelector("#choice3"),
-  choice4: document.querySelector("#choice4"),
-  nextBtn: document.querySelector("#next-btn"),
-  score: document.querySelector("#score"),
-  retake: document.querySelector("#retake-btn"),
-  landing: document.querySelector("#landing"),
-  quizGame: document.querySelector("#quiz-game"),
-  endPage: document.querySelector("#end"),
-  choices: document.querySelectorAll(".choice"),
-  scoreBoard: document.querySelector("#score-board")
-};
-exports.DOMSelectors = DOMSelectors;
-},{}],"js/questions.js":[function(require,module,exports) {
-"use strict";
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.questions = void 0;
-var questions = [{
-  question: "What anime is this ?",
-  choices: ["Naruto", "One Piece", "Demon Slayer", "Black Clover"],
-  answer: "One Piece"
-}, {
-  question: "What anime is this guy from ?",
-  choices: ["Naruto", "One piece", "Demon Slayer", "Black Clover"],
-  answer: "Naruto"
-}];
-exports.questions = questions;
-},{}],"js/index.js":[function(require,module,exports) {
-"use strict";
+var start = document.getElementById("start");
+var quiz = document.getElementById("quiz");
+var qImage = document.getElementById("qImage");
+var question = document.getElementById("question");
+var counter = document.getElementById("counter");
+var timeGauge = document.getElementById("timeGauge");
+var progress = document.getElementById("progress");
+var scoreContainer = document.getElementById("scoreContainer");
+var choiceA = document.getElementById("A");
+var choiceB = document.getElementById("B");
+var choiceC = document.getElementById("C");
+var questions = [(_ref = {
+  question: "Which animal can live the longest",
+  choiceA: "giraffe",
+  choiceB: "Cow"
+}, _defineProperty(_ref, "choiceA", "Pig"), _defineProperty(_ref, "correct", "A"), _ref), (_ref2 = {
+  question: "Which animal can run the fastest",
+  choiceA: "Rhino",
+  choiceB: "Cheeta"
+}, _defineProperty(_ref2, "choiceA", "Kangaroo"), _defineProperty(_ref2, "correct", "B"), _ref2)];
+var lastQuestion = question.length - 1;
+var runningQuestion = 0;
+var count = 0;
+var questionTime = 10;
+var gaugeWidth = 150;
+var gaugeUnit = gaugeWidth / questionTime;
 
-var _DOMSelectors = require("./DOMSelectors");
-
-var _questions = require("./questions");
-
-console.log("connected");
-var score = 0;
-var index = 0; //switches from landing page to quiz page
-
-_DOMSelectors.DOMSelectors.start.addEventListener("click", function () {
-  _DOMSelectors.DOMSelectors.landing.style.display = "none";
-  _DOMSelectors.DOMSelectors.quizGame.style.display = "flex";
-}); //shows the questions and choices
-
-
-function showQuestions() {
-  _DOMSelectors.DOMSelectors.quizQuestion.innerHTML = _questions.questions[index].question;
-  _DOMSelectors.DOMSelectors.choice1.innerHTML = _questions.questions[index].choices[0];
-  _DOMSelectors.DOMSelectors.choice2.innerHTML = _questions.questions[index].choices[1];
-  _DOMSelectors.DOMSelectors.choice3.innerHTML = _questions.questions[index].choices[2];
-  _DOMSelectors.DOMSelectors.choice4.innerHTML = _questions.questions[index].choices[3];
+function renderQuestion() {
+  var q = questions[runningQuestion];
+  question.innerHTML = "<p>" + q.question + "</p>";
+  qImg.innerHTML = "<img src=" + q.imgSrc + ">";
+  choiceA.innerHTML = q.choiceA;
+  choiceB.innerHTML = q.choiceB;
+  choiceC.innerHTML = q.choiceC;
 }
 
-showQuestions(); //when next button is clicked, moves on to the next index until max index is reached
+start.style.display = "none";
+renderQuestion();
+quiz.style.display = "block";
+renderProgress(); //progress
 
-_DOMSelectors.DOMSelectors.nextBtn.addEventListener("click", function () {
-  if (index < _questions.questions.length - 1) {
-    index++;
-    showQuestions();
+function renderProgress() {
+  for (var qIndex = 0; qIndex <= lastQuestion; qIndex++) {
+    progress.innerHTML += "<div class= 'prog' id= " + qIndex + "></div>";
+  }
+}
+
+function renderCounter() {
+  if (count <= questionTime) {
+    counter.innerHTML = count;
+    timeGauge.style.width = count * gaugeUnit;
+    count++;
   } else {
-    _DOMSelectors.DOMSelectors.quizGame.style.display = "none";
-    _DOMSelectors.DOMSelectors.endPage.style.display = "flex";
+    count = 0;
   }
-
-  Array.from(_DOMSelectors.DOMSelectors.choices).forEach(function (choice) {
-    choice.style.backgroundColor = "rgb(44, 42, 42)";
-  });
-
-  for (var i = 0; i <= 3; i++) {
-    _DOMSelectors.DOMSelectors.choices[i].classList.remove("disabled");
-  }
-
-  _DOMSelectors.DOMSelectors.scoreBoard.innerHTML = "You Scored: ".concat(score, "/").concat(_questions.questions.length);
-});
-
-Array.from(_DOMSelectors.DOMSelectors.choices).forEach(function (choice) {
-  choice.addEventListener("click", function (e) {
-    var selectedTarget = e.target;
-    var selectedChoice = selectedTarget.innerHTML;
-
-    if (selectedChoice === _questions.questions[index].answer) {
-      selectedTarget.style.backgroundColor = "green";
-      score++;
-    } else {
-      selectedTarget.style.backgroundColor = "red";
-    }
-
-    for (var i = 0; i <= 3; i++) {
-      _DOMSelectors.DOMSelectors.choices[i].classList.add("disabled");
-    }
-  });
-});
-
-_DOMSelectors.DOMSelectors.retake.addEventListener("click", function () {
-  _DOMSelectors.DOMSelectors.endPage.style.display = "none";
-  _DOMSelectors.DOMSelectors.landing.style.display = "flex";
-  score = 0;
-  index = 0;
-  showQuestions();
-});
-},{"./DOMSelectors":"js/DOMSelectors.js","./questions":"js/questions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+}
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -258,7 +206,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50445" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53584" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
