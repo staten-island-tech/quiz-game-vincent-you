@@ -85,7 +85,7 @@ getNewQuestion = () => {
 
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
-        if(!acceptingAnswers) return 
+        if(!acceptingAnswers) return    
 
         acceptingAnswers = false
         const selectedChoice = e.target
@@ -97,11 +97,12 @@ choices.forEach(choice => {
             incrementScore(SCORE_POINTS)
         }
 
-            selectedChoice.parentElement.classList.add(classToApply) //this will count if you answer the question correctly
-            setTimeout(() => {
-                selectedChoice.parentElement.classList.remove(classToApply) //this will allow score to change if u get it wrong
-                getNewQuestion ()
-            }, 1000)
+         selectedChoice.parentElement.classList.add(classToApply) //this will count if you answer the question correctly
+         
+         setTimeout(() => {
+           selectedChoice.parentElement.classList.remove(classToApply) //this will allow score to change if u get it wrong
+             getNewQuestion ()
+        }, 1000)
     })
 })
 
