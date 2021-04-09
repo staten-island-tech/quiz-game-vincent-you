@@ -140,7 +140,7 @@ var questions = [{
   question: "What name starts with B ?",
   choices1: 'Chandler',
   choices2: 'Kristina',
-  choices3: 'M elony',
+  choices3: 'Melony',
   choices4: 'Henry',
   answer: 1
 }, {

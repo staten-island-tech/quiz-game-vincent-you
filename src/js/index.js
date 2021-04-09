@@ -24,7 +24,7 @@ let questions = [
         question: "What name starts with B ?",
         choices1: 'Chandler' ,
         choices2: 'Kristina',
-        choices3: 'M elony',
+        choices3: 'Melony',
         choices4: 'Henry',
         answer: 1,       
       },
@@ -50,6 +50,7 @@ let questions = [
 const SCORE_POINTS = 100
 const MAX_QUESTIONS = 4
 
+
 startGame = () => { //starting a function
     questionCounter = 0
     score = 0
@@ -58,7 +59,7 @@ startGame = () => { //starting a function
 }
 
 getNewQuestion = () => {
-    if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS){
+    if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore',score) //this will keep track of the score as u take the quiz
 
         return window.location.assign('/end.html')
