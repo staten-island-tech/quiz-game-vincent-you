@@ -128,8 +128,10 @@ var progressBarFull = document.querySelector('#progressBarFull');
 var currentQuestion = {}; //put it into an empty object
 
 var acceptingAnswers = true;
-var score = 0;
-var questionCounter = 0;
+var score = 0; //score starts at 0
+
+var questionCounter = 0; //questions start at 0
+
 var availableQuestions = [];
 var questions = [{
   question: "What name starts with C ?",
@@ -162,7 +164,7 @@ var questions = [{
 }];
 console.log(questions);
 var SCORE_POINTS = 100;
-var MAX_QUESTIONS = 4;
+var maxquestions = 4;
 
 startGame = function startGame() {
   //starting a function
@@ -174,16 +176,16 @@ startGame = function startGame() {
 };
 
 getNewQuestion = function getNewQuestion() {
-  if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+  if (availableQuestions.length === 0 || questionCounter > maxquestions) {
     localStorage.setItem("mostRecentScore", score); //this will keep track of the score as u take the quiz
 
     return window.location.assign("/end.html"); // PERHAPS THE PROBLEM ???????????????????????????????????????????????
   }
 
   questionCounter++;
-  progressText.innerText = "Question ".concat(questionCounter, " of ").concat(MAX_QUESTIONS); //means the questions coutner text will be the current questions out of in this case 4 questions
+  progressText.innerText = "Question ".concat(questionCounter, " of ").concat(maxquestions); //means the questions coutner text will be the current questions out of in this case 4 questions
 
-  progressBarFull.style.width = "".concat(questionCounter / MAX_QUESTIONS * 100, "%"); //calculate the question we are on and multiply it by percent 
+  progressBarFull.style.width = "".concat(questionCounter / maxquestions * 100, "%"); //calculate the question we are on and multiply it by percent 
 
   var questionsIndex = Math.floor(Math.random() * availableQuestions.length); //this will calculate the question index
 
@@ -193,24 +195,24 @@ getNewQuestion = function getNewQuestion() {
 
   console.log(questionsIndex);
   choices.forEach(function (choice) {
-    var number = choice.dataset['number']; //you'll know what choice we are clicking on
+    var number = choice.dataset["number"]; //you'll know what choice we are clicking on
 
-    choice.innerText = currentQuestion['choice' + number];
+    choice.innerText = currentQuestion["choice" + number];
   });
   availableQuestions.splice(questionsIndex, 1); //it adds item to the array
 
   acceptingAnswers = true;
 };
 
-choices.forEach(function (choice) {
+var gradUser = choices.forEach(function (choice) {
   choice.addEventListener('click', function (e) {
     if (!acceptingAnswers) return;
     acceptingAnswers = false;
     var selectedChoice = e.target;
-    var selectedAnswer = selectedChoice.dataset['number'];
-    var classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'; //using ternary
+    var selectedAnswer = selectedChoice.dataset["number"];
+    var classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect"; //using ternary
 
-    if (classToApply === 'correct') {
+    if (classToApply === "correct") {
       incrementScore(SCORE_POINTS);
     }
 
@@ -259,7 +261,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53567" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55866" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

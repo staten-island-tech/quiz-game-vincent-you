@@ -7,8 +7,8 @@ const progressBarFull = document.querySelector('#progressBarFull')
 
 let currentQuestion = {}; //put it into an empty object
 let acceptingAnswers = true;
-let score = 0;
-let questionCounter = 0 ; 
+let score = 0; //score starts at 0
+let questionCounter = 0; //questions start at 0
 let availableQuestions = [];
 
 let questions = [
@@ -49,7 +49,7 @@ let questions = [
 console.log(questions)
 
 const SCORE_POINTS = 100
-const MAX_QUESTIONS = 4
+const maxquestions = 4
 
 startGame = () => { //starting a function
     questionCounter = 0
@@ -59,14 +59,14 @@ startGame = () => { //starting a function
 }
 
 getNewQuestion = () => {
-    if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+    if (availableQuestions.length === 0 || questionCounter > maxquestions) {
         localStorage.setItem("mostRecentScore",score) //this will keep track of the score as u take the quiz
 
         return window.location.assign("/end.html"); // PERHAPS THE PROBLEM ???????????????????????????????????????????????
     }
     questionCounter++
-    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}` //means the questions coutner text will be the current questions out of in this case 4 questions
-    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%` //calculate the question we are on and multiply it by percent 
+    progressText.innerText = `Question ${questionCounter} of ${maxquestions}` //means the questions coutner text will be the current questions out of in this case 4 questions
+    progressBarFull.style.width = `${(questionCounter/maxquestions) * 100}%` //calculate the question we are on and multiply it by percent 
 
 
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length) //this will calculate the question index
@@ -74,28 +74,27 @@ getNewQuestion = () => {
     question.innerText = currentQuestion.question //show the text the question will show
     console.log(questionsIndex)
         
-    choices.forEach(choice => {
-        const number = choice.dataset['number'] //you'll know what choice we are clicking on
-        choice.innerText = currentQuestion['choice' + number]
-    })
+    choices.forEach((choice) => {
+        const number = choice.dataset["number"]; //you'll know what choice we are clicking on
+        choice.innerText = currentQuestion["choice" + number];
+    });
+    
+    availableQuestions.splice(questionsIndex, 1); //it adds item to the array
 
-    availableQuestions.splice(questionsIndex, 1) //it adds item to the array
+    acceptingAnswers = true;    
+};
 
-    acceptingAnswers = true 
-}
-
-
-choices.forEach(choice => {
-    choice.addEventListener('click', e => {
-        if(!acceptingAnswers) return    
+const gradUser= choices.forEach((choice) => {
+    choice.addEventListener('click', (e) => {
+        if(!acceptingAnswers) return 
 
         acceptingAnswers = false
         const selectedChoice = e.target
-        const selectedAnswer =  selectedChoice.dataset['number']
+        const selectedAnswer =  selectedChoice.dataset["number"]
 
-        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect' //using ternary
+        let classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect" //using ternary
 
-        if (classToApply === 'correct'){    
+        if (classToApply === "correct"){    
             incrementScore(SCORE_POINTS)
         }
 
@@ -103,7 +102,7 @@ choices.forEach(choice => {
          
          setTimeout(() => {
            selectedChoice.parentElement.classList.remove(classToApply) //this will allow score to change if u get it wrong
-             getNewQuestion ()
+            getNewQuestion ()
         }, 1000)
     })  
 })
