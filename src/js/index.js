@@ -13,38 +13,37 @@ let availableQuestions = [];
 
 let questions = [
     {
-        question: "What name starts with C ?",
-        choices1: 'Chandler' ,
-        choices2: 'Kristina',
-        choices3: 'Melony',
-        choices4: 'Henry',
-        answer: 1,       
+        question: "What country is Venice located in?",
+        choice1: "France",
+        choice2: "Italy",
+        choice3: "Australia",
+        choice4: "Japan",
+        answer: 2,
       },
-    {
-        question: "What name starts with B ?",
-        choices1: 'Chandler' ,
-        choices2: 'Kristina',
-        choices3: 'Melony',
-        choices4: 'Henry',
-        answer: 2,       
+      {
+        question: "Who is the main character in Harry Potter?",
+        choice1: "Henry Porter",
+        choice2: "Hairy Potter",
+        choice3: "Harry Potter",
+        choice4: "Henrie Potsticker",
+        answer: 3,
       },
-    {
-        question: "What name starts with Z ?",
-        choices1: 'Chandler' ,
-        choices2: 'Kristina',
-        choices3: 'Melony',
-        choices4: 'Henry',
-        answer: 3,       
+      {
+        question: "Which of these Avengers isn't dead?",
+        choice1: "Iron Man",
+        choice2: "Hawkeye",
+        choice3: "Black Widow",
+        choice4: "Vision",
+        answer: 2,
       },
-      
-    {
-        question: "What name starts with G ?",
-        choices1: 'Chandler' ,
-        choices2: 'Kristina',
-        choices3: 'Melony',
-        choices4: 'Henry',
-        answer: 4,       
-      },     
+      {
+        question: "Who is the best spiderman?",
+        choice1: "Tobey Maguire",
+        choice2: "Andrew Garfield",
+        choice3: "Tom Holland",
+        choice4: "none of them",
+        answer: 3,
+      },
 ]
 console.log(questions)
 
@@ -84,13 +83,13 @@ getNewQuestion = () => {
     acceptingAnswers = true;    
 };
 
-const gradUser= choices.forEach((choice) => {
-    choice.addEventListener('click', (e) => {
-        if(!acceptingAnswers) return 
+choices.forEach((choice) => {
+    choice.addEventListener("click", (e) => {
+      if (!acceptingAnswers) return;
 
-        acceptingAnswers = false
-        const selectedChoice = e.target
-        const selectedAnswer =  selectedChoice.dataset["number"]
+      acceptingAnswers = false;
+      const selectedChoice = e.target;
+      const selectedAnswer = selectedChoice.dataset["number"];
 
         let classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect" //using ternary
 

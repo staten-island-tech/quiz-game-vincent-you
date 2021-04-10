@@ -134,33 +134,33 @@ var questionCounter = 0; //questions start at 0
 
 var availableQuestions = [];
 var questions = [{
-  question: "What name starts with C ?",
-  choices1: 'Chandler',
-  choices2: 'Kristina',
-  choices3: 'Melony',
-  choices4: 'Henry',
-  answer: 1
-}, {
-  question: "What name starts with B ?",
-  choices1: 'Chandler',
-  choices2: 'Kristina',
-  choices3: 'Melony',
-  choices4: 'Henry',
+  question: "What country is Venice located in?",
+  choice1: "France",
+  choice2: "Italy",
+  choice3: "Australia",
+  choice4: "Japan",
   answer: 2
 }, {
-  question: "What name starts with Z ?",
-  choices1: 'Chandler',
-  choices2: 'Kristina',
-  choices3: 'Melony',
-  choices4: 'Henry',
+  question: "Who is the main character in Harry Potter?",
+  choice1: "Henry Porter",
+  choice2: "Hairy Potter",
+  choice3: "Harry Potter",
+  choice4: "Henrie Potsticker",
   answer: 3
 }, {
-  question: "What name starts with G ?",
-  choices1: 'Chandler',
-  choices2: 'Kristina',
-  choices3: 'Melony',
-  choices4: 'Henry',
-  answer: 4
+  question: "Which of these Avengers isn't dead?",
+  choice1: "Iron Man",
+  choice2: "Hawkeye",
+  choice3: "Black Widow",
+  choice4: "Vision",
+  answer: 2
+}, {
+  question: "Who is the best spiderman?",
+  choice1: "Tobey Maguire",
+  choice2: "Andrew Garfield",
+  choice3: "Tom Holland",
+  choice4: "none of them",
+  answer: 3
 }];
 console.log(questions);
 var SCORE_POINTS = 100;
@@ -204,8 +204,8 @@ getNewQuestion = function getNewQuestion() {
   acceptingAnswers = true;
 };
 
-var gradUser = choices.forEach(function (choice) {
-  choice.addEventListener('click', function (e) {
+choices.forEach(function (choice) {
+  choice.addEventListener("click", function (e) {
     if (!acceptingAnswers) return;
     acceptingAnswers = false;
     var selectedChoice = e.target;
@@ -261,7 +261,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56237" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63390" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
