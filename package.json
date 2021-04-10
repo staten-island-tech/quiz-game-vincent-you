@@ -2,7 +2,7 @@
   "name": "quiz-game-vincent-you",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.html",
   "scripts": {
     "start": "parcel src/index.html",
     "build-prod": "parcel build src/index.html"
