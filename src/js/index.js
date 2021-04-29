@@ -47,8 +47,8 @@ let questions = [
 ]
 console.log(questions)
 
-const SCORE_POINTS = 100
-const maxquestions = 4
+const scorePoints = 100
+const maxQuestions = 4
 
 startGame = () => { //starting a function
     questionCounter = 0
@@ -58,14 +58,14 @@ startGame = () => { //starting a function
 }
 
 getNewQuestion = () => {
-    if (availableQuestions.length === 0 || questionCounter > maxquestions) {
+    if (availableQuestions.length === 0 || questionCounter > maxQuestions) {
         localStorage.setItem("mostRecentScore",score) //this will keep track of the score as u take the quiz
 
         return window.location.assign("/end.html"); // PERHAPS THE PROBLEM ???????????????????????????????????????????????
     }
     questionCounter++
-    progressText.innerText = `Question ${questionCounter} of ${maxquestions}` //means the questions coutner text will be the current questions out of in this case 4 questions
-    progressBarFull.style.width = `${(questionCounter/maxquestions) * 100}%` //calculate the question we are on and multiply it by percent 
+    progressText.innerText = `Question ${questionCounter} of ${maxQuestions}` //means the questions coutner text will be the current questions out of in this case 4 questions
+    progressBarFull.style.width = `${(questionCounter/maxuestions) * 100}%` //calculate the question we are on and multiply it by percent 
 
 
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length) //this will calculate the question index
@@ -94,7 +94,7 @@ choices.forEach((choice) => {
         let classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect" //using ternary
 
         if (classToApply === "correct"){    
-            incrementScore(SCORE_POINTS)
+            incrementScore(scorePoints)
         }
 
          selectedChoice.parentElement.classList.add(classToApply) //this will count if you answer the question correctly
