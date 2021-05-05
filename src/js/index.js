@@ -1,10 +1,10 @@
 console.log("connected")
+import { questions } from "./questions"
 const question = document.querySelector("#question"); //allows you to change the nature of the element (class to id, vice versa)
 const choices = Array.from(document.querySelectorAll(".choice-text"));
 const scoreText = document.querySelector("#score");
 const progressText = document.querySelector('#progressText')
 const progressBarFull = document.querySelector('#progressBarFull')
-import { questions } from "./questions"
 
 let currentQuestion = {}; //put it into an empty object
 let acceptingAnswers = true;
